@@ -1,4 +1,4 @@
 PyLogger
 ========
 
-Simple Python Logging Module
+Simple Python text file logging module
