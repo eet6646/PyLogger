@@ -5,7 +5,7 @@ PyLogger: A simple data to file logger!
 
 .. begin_description
 
-PyLogger is a simple data to file logging module. Use it to quickly log and debug scripts without sacrificing precious space in your script. Log events, warnings, exceptions and more into a readable log file with a customizable output!
+PyLogger is a simple data to file logging module. Use it to quickly log and debug scripts, or log something over time. Log events, warnings, exceptions and more into a readable log file with a customizable output!
 
 .. end_description
 

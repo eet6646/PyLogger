@@ -1,16 +1,3 @@
-
-"""
-
-PyLogger
-
-PyLogger is a simple data to file logging module. 
-Use it to quickly log and debug scripts without sacrificing 
-precious space in your script. Log events, warnings, exceptions 
-and more into a readable log file with a customizable output!
-
-"""
-
-
 import time
 import os
 from datetime import datetime
@@ -50,7 +37,7 @@ class PyLogger():
         self.prefix = prefix
         self.enabled = False
 
-    def open(self,*args):
+    def open(self, *args):
         """Initialize a new logger"""
         self.__init__(*args)
 
@@ -62,10 +49,10 @@ class PyLogger():
 
         """
         try:
-            open(self.fileName,'w').close()
+            open(self.fileName, 'w').close()
             return True
         except IOError, e:
-            raise Exception("Could not clear log file: {0}\nInfo: {1}".format(self.fileName,e))
+            raise Exception("Could not clear log file: {0}\nInfo: {1}".format(self.fileName, e))
 
     def delete(self):
         """Delete the log file
@@ -78,7 +65,7 @@ class PyLogger():
             if os.path.isfile(self.fileName):
                 os.remove(self.fileName)
         except OSError, e:
-            raise Exception("Could not delete log file: {0}\nInfo: {1}".format(self.fileName,e))
+            raise Exception("Could not delete log file: {0}\nInfo: {1}".format(self.fileName, e))
 
     def pause(self):
         """Pause the logging until resumed"""
@@ -96,7 +83,7 @@ class PyLogger():
         """Resume the logging from paused"""
         self.enabled = True
 
-    def setLogType(self,logtype):
+    def setLogType(self, logtype):
         """Set the log type
 
             :param logtype: Log type
@@ -105,7 +92,7 @@ class PyLogger():
         """
         self.logType = logtype
 
-    def setLogFormat(self,logformat):
+    def setLogFormat(self, logformat):
         """Set custom log format
 
             :param logformat: Log format
@@ -118,9 +105,9 @@ class PyLogger():
 
     def resetLogFormat(self):
         """Reset log format to default format"""
-        self.logFormat='[{timestamp}]{logtype}: {message}'
+        self.logFormat = '[{timestamp}]{logtype}: {message}'
 
-    def setTimestampFormat(self,timestamp):
+    def setTimestampFormat(self, timestamp):
         """Set custom timestamp format
 
             :param timestamp: Timestamp
@@ -156,12 +143,12 @@ class PyLogger():
         if not os.path.isfile(self.fileName):
             return self.clear()
 
-    def log(self,logstr,logtype=''):
+    def log(self, logstr, logtype=''):
         """Function to log message to file.
 
             :param logstr: The string you want to log
             :type logstr: str
-            :param logtype: Optional argument, custom log type. 
+            :param logtype: Optional argument, custom log type.
                 If not provided, defaults to defined log type.
             :type logtype: str
 
@@ -173,7 +160,7 @@ class PyLogger():
             return False
         try:
             self.createIfNonExistent()
-            
+
             cLogType = self.logType
             if logtype != '':
                 cLogType = logtype
@@ -181,29 +168,29 @@ class PyLogger():
             logMessage = self.logFormat.format(timestamp=self.getTimeStamp(),
                                                logtype=cLogType,
                                                message=logstr)
-            with open(self.fileName,'a') as f:
+            with open(self.fileName, 'a') as f:
                 f.write(self.prefix + logMessage + self.postfix)
                 f.close()
             return True
         except IOError, e:
-            raise Exception("Could not save log file: {0}\nDetails: {1}".format(self.fileName,e))
+            raise Exception("Could not save log file: {0}\nDetails: {1}".format(self.fileName, e))
 
-    def info(self,logstr):
+    def info(self, logstr):
         """Function that calls the log function with type INFO"""
-        self.log(logstr,"INFO")
+        self.log(logstr, "INFO")
 
-    def warning(self,logstr):
+    def warning(self, logstr):
         """Function that calls the log function with type WARNING"""
-        self.log(logstr,"WARNING")
+        self.log(logstr, "WARNING")
 
-    def error(self,logstr):
+    def error(self, logstr):
         """Function that calls the log function with type ERROR"""
-        self.log(logstr,"ERROR")
+        self.log(logstr, "ERROR")
 
-    def critical(self,logstr):
+    def critical(self, logstr):
         """Function that calls the log function with type CRITICAL"""
-        self.log(logstr,"CRITICAL")
+        self.log(logstr, "CRITICAL")
 
-    def exception(self,logstr):
+    def exception(self, logstr):
         """Function that calls the log function with type EXCEPTION"""
-        self.log(logstr,"EXCEPTION")
+        self.log(logstr, "EXCEPTION")
